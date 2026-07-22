@@ -1,0 +1,44 @@
+EARTH HERO MISSION — คู่มือเริ่มต้น
+ฮีโร่พิทักษ์โลก คนเซ็นทรัล
+
+ไฟล์หลัก
+- index.html        หน้าเกม
+- style.css         รูปแบบและแอนิเมชัน
+- app.js            ระบบเกม
+- config.js         รายชื่อสาขาและ URL ของ Google Apps Script
+- Code.gs           ระบบบันทึก Google Sheets
+
+ทดลองเล่นบนเครื่อง
+1. แตกไฟล์ ZIP
+2. ดับเบิลคลิก index.html
+3. เกมเล่นได้แม้ยังไม่เชื่อม Google Sheets
+
+อัปขึ้น GitHub Pages
+1. สร้าง Repository ใหม่
+2. อัปโหลดไฟล์ทั้งหมดที่อยู่ข้างใน ZIP ไปไว้หน้าแรกของ Repository
+3. เข้า Settings → Pages
+4. Source เลือก Deploy from a branch
+5. Branch เลือก main และ /root
+6. กด Save แล้วรอ Actions เป็นสีเขียว
+
+เชื่อม Google Sheets
+1. สร้าง Google Sheet ใหม่
+2. คัดลอก Spreadsheet ID จาก URL
+3. เปิด Extensions → Apps Script
+4. ลบโค้ดเดิม แล้ววาง Code.gs
+5. เปลี่ยน PUT_YOUR_SPREADSHEET_ID_HERE เป็น Spreadsheet ID
+6. Save และ Run ฟังก์ชัน setupSheets หนึ่งครั้ง
+7. กดยืนยันสิทธิ์
+8. Deploy → New deployment → Web app
+9. Execute as: Me
+10. Who has access: Anyone
+11. Deploy แล้วคัดลอก URL ที่ลงท้าย /exec
+12. เปิด config.js แล้วใส่ URL ใน API_URL
+13. อัปโหลด config.js ขึ้น GitHub ทับไฟล์เดิม
+
+ข้อมูลที่บันทึก
+- Players: ข้อมูลลงทะเบียน
+- Results: คะแนน เวลาเล่น จำนวนด่าน และภารกิจที่สำเร็จ
+
+เวอร์ชัน
+Earth Hero Mission 1.0 — 22 July 2026

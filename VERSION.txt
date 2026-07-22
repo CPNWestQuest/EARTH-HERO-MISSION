@@ -1,0 +1,5 @@
+EARTH HERO MISSION
+ฮีโร่พิทักษ์โลก คนเซ็นทรัล
+Version 1.1 — 2026-07-22
+4 stages / 12 easy missions / animated semi-realistic vector scenes
+Score capped at 120 and completed stages are locked to prevent duplicate scoring.

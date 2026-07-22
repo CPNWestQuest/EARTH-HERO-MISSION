@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c6650" />
+  <meta name="description" content="EARTH HERO MISSION เกมฮีโร่พิทักษ์โลก คนเซ็นทรัล" />
+  <title>EARTH HERO MISSION | ฮีโร่พิทักษ์โลก คนเซ็นทรัล</title>
+  <link rel="stylesheet" href="style.css?v=20260722-earth-hero-2" />
+</head>
+<body>
+  <main class="app-shell" id="appShell">
+    <button id="soundToggle" class="sound-toggle" type="button" aria-label="เปิดหรือปิดเสียง">🔊</button>
+
+    <section id="splashScreen" class="screen splash-screen active" aria-labelledby="gameTitle">
+      <div class="sky-particles" aria-hidden="true"></div>
+      <div class="hero-earth" aria-hidden="true">
+        <div class="earth-glow"></div>
+        <svg viewBox="0 0 360 360" role="img" aria-label="โลกที่กำลังเปลี่ยนจากหม่นเป็นสีเขียว">
+          <defs>
+            <radialGradient id="earthSea" cx="35%" cy="28%" r="75%">
+              <stop offset="0" stop-color="#89d9ff"/>
+              <stop offset=".52" stop-color="#269acb"/>
+              <stop offset="1" stop-color="#126b9b"/>
+            </radialGradient>
+            <linearGradient id="earthLand" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#b7e07d"/>
+              <stop offset="1" stop-color="#3ea961"/>
+            </linearGradient>
+            <filter id="earthShadow"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-opacity=".25"/></filter>
+          </defs>
+          <circle cx="180" cy="180" r="142" fill="url(#earthSea)" filter="url(#earthShadow)"/>
+          <path class="continent continent-a" d="M86 108c26-38 61-43 85-24 17 14 31 12 46 20 18 10 26 29 12 45-12 13-28 10-37 25-7 12-5 31-21 39-22 12-31-17-48-19-17-3-32 13-46 1-18-16-5-39-10-56-3-12 4-22 19-31Z" fill="url(#earthLand)"/>
+          <path class="continent continent-b" d="M220 190c24-11 57 4 63 26 4 16-9 27-15 40-8 18-6 39-26 46-23 8-42-10-45-31-2-14 10-26 6-38-5-17 0-35 17-43Z" fill="url(#earthLand)"/>
+          <ellipse cx="125" cy="113" rx="44" ry="17" fill="rgba(255,255,255,.22)" transform="rotate(-18 125 113)"/>
+          <g class="orbit-leaves">
+            <path d="M42 164c-25-8-30-29-14-42 18 1 31 16 29 34-5 3-10 6-15 8Z" fill="#7fd876"/>
+            <path d="M320 139c25-8 30-29 14-42-18 1-31 16-29 34 5 3 10 6 15 8Z" fill="#62bf68"/>
+            <path d="M84 307c-16 21-39 20-47 1 7-17 25-26 41-19 2 6 4 12 6 18Z" fill="#83d978"/>
+          </g>
+        </svg>
+        <span class="hero-cape">🦸‍♀️</span>
+      </div>
+      <div class="splash-copy">
+        <p class="eyebrow">CENTRAL PEOPLE GREEN GAME</p>
+        <h1 id="gameTitle">EARTH HERO<br><span>MISSION</span></h1>
+        <h2>ฮีโร่พิทักษ์โลก คนเซ็นทรัล</h2>
+        <p>เดินทางผ่าน 4 สถานที่ ทำภารกิจง่าย ๆ และช่วยให้โลกกลับมาเขียวอีกครั้ง</p>
+        <div class="splash-actions">
+          <button id="startButton" class="primary-button hero-button" type="button">เริ่มภารกิจ</button>
+          <button id="howButton" class="ghost-button" type="button">ดูวิธีเล่น</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="registerScreen" class="screen form-screen" aria-labelledby="registerTitle">
+      <div class="form-panel">
+        <button class="back-button" data-back="splashScreen" type="button" aria-label="กลับ">‹</button>
+        <div class="mini-logo">🌍</div>
+        <p class="eyebrow dark">EARTH HERO MISSION</p>
+        <h1 id="registerTitle">ลงทะเบียนฮีโร่พิทักษ์โลก</h1>
+        <p class="form-lead">กรอกข้อมูลก่อนเริ่มภารกิจ ข้อมูลคะแนนสามารถเชื่อมต่อ Google Sheets ได้</p>
+        <form id="registrationForm" novalidate>
+          <div class="two-cols">
+            <label>ชื่อ
+              <input id="firstName" name="firstName" autocomplete="given-name" required />
+            </label>
+            <label>นามสกุล
+              <input id="surname" name="surname" autocomplete="family-name" required />
+            </label>
+          </div>
+          <label>รหัสพนักงาน
+            <input id="employeeId" name="employeeId" inputmode="numeric" required />
+          </label>
+          <label>รหัสสาขา
+            <select id="branch" name="branch" required>
+              <option value="">เลือกสาขา</option>
+            </select>
+          </label>
+          <label id="otherBranchField" class="hidden">ระบุรหัสหรือชื่อสาขาอื่น ๆ
+            <input id="otherBranch" name="otherBranch" maxlength="120" placeholder="กรอกรหัสสาขาหรือชื่อสาขา" />
+          </label>
+          <label>เบอร์โทรศัพท์
+            <input id="phone" name="phone" inputmode="tel" autocomplete="tel" maxlength="10" required />
+          </label>
+          <label class="consent-row">
+            <input id="consent" type="checkbox" required />
+            <span>ยินยอมให้บันทึกข้อมูลการเล่นเพื่อสรุปผลกิจกรรม</span>
+          </label>
+          <p id="formError" class="form-error" role="alert"></p>
+          <button id="registerSubmit" class="primary-button" type="submit">ลงทะเบียนและเริ่มเล่น</button>
+          <p id="reportStatus" class="report-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="howScreen" class="screen info-screen" aria-labelledby="howTitle">
+      <div class="info-panel">
+        <button class="back-button" data-back="splashScreen" type="button" aria-label="กลับ">‹</button>
+        <p class="eyebrow dark">HOW TO PLAY</p>
+        <h1 id="howTitle">วิธีเล่นง่ายมาก</h1>
+        <div class="how-grid">
+          <article><span>1</span><div><b>เดินทาง 4 ด่าน</b><p>ศูนย์การค้า บ้าน สวนสาธารณะ และชายหาด</p></div></article>
+          <article><span>2</span><div><b>ทำภารกิจสั้น ๆ</b><p>เลือกคำตอบหรือแตะสิ่งของบนภาพให้ครบ</p></div></article>
+          <article><span>3</span><div><b>สะสมดาวสีเขียว</b><p>ทุกภารกิจที่สำเร็จได้รับ 10 คะแนน</p></div></article>
+          <article><span>4</span><div><b>เปลี่ยนโลก</b><p>ภาพโลกจะค่อย ๆ เปลี่ยนจากหม่นเป็นสีเขียว</p></div></article>
+        </div>
+        <button id="howStartButton" class="primary-button" type="button">พร้อมแล้ว เริ่มภารกิจ</button>
+      </div>
+    </section>
+
+    <section id="storyScreen" class="screen story-screen" aria-labelledby="storyTitle">
+      <div class="story-scene" aria-hidden="true">
+        <div class="story-smog"></div>
+        <div class="story-city">
+          <span>🏢</span><span>🏬</span><span>🏭</span><span>🏙️</span>
+        </div>
+        <div class="story-road"><i></i><i></i><i></i></div>
+      </div>
+      <div class="story-card">
+        <p class="eyebrow">MISSION BRIEF</p>
+        <h1 id="storyTitle">โลกกำลังขอความช่วยเหลือ</h1>
+        <p>ขยะ พลาสติก การใช้พลังงานเกินจำเป็น และมลพิษกำลังทำให้สถานที่รอบตัวเราหม่นลง</p>
+        <p><strong>ภารกิจของคุณ:</strong> ช่วยแก้ปัญหาในแต่ละสถานที่ แล้วคืนสีเขียวให้กับโลก</p>
+        <button id="storyNextButton" class="primary-button" type="button">รับภารกิจ</button>
+      </div>
+    </section>
+
+    <section id="mapScreen" class="screen map-screen" aria-labelledby="mapTitle">
+      <header class="map-header">
+        <div>
+          <p class="eyebrow">MISSION MAP</p>
+          <h1 id="mapTitle">เส้นทางฮีโร่พิทักษ์โลก</h1>
+          <p id="playerGreeting">ฮีโร่ — พร้อมลุย!</p>
+        </div>
+        <div class="world-meter" aria-label="ความเขียวของโลก">
+          <div class="mini-earth"><span id="worldLeaf">🌍</span></div>
+          <strong id="worldPercent">0%</strong>
+          <small>โลกสีเขียว</small>
+        </div>
+      </header>
+      <div class="mission-path" id="missionPath">
+        <article class="mission-card unlocked" data-stage="0">
+          <div class="mission-visual mall-visual"><span>🏬</span><i></i><i></i></div>
+          <div><small>ด่านที่ 1</small><h2>ศูนย์การค้า</h2><p>ประหยัดพลังงาน ลดพลาสติก และแยกขยะ</p></div>
+          <button type="button">เริ่มด่าน</button>
+        </article>
+        <article class="mission-card locked" data-stage="1">
+          <div class="mission-visual home-visual"><span>🏡</span><i></i></div>
+          <div><small>ด่านที่ 2</small><h2>บ้าน</h2><p>ลดไฟ ลดน้ำ และจัดการขยะในบ้าน</p></div>
+          <button type="button" disabled>🔒 ยังไม่ปลดล็อก</button>
+        </article>
+        <article class="mission-card locked" data-stage="2">
+          <div class="mission-visual park-visual"><span>🌳</span><i>🦆</i></div>
+          <div><small>ด่านที่ 3</small><h2>สวนสาธารณะ</h2><p>เก็บขยะ ปลูกต้นไม้ และช่วยสัตว์</p></div>
+          <button type="button" disabled>🔒 ยังไม่ปลดล็อก</button>
+        </article>
+        <article class="mission-card locked" data-stage="3">
+          <div class="mission-visual beach-visual"><span>🏖️</span><i>🐢</i></div>
+          <div><small>ด่านที่ 4</small><h2>ชายหาด</h2><p>เก็บขยะทะเล รีไซเคิล และป้องกันขยะลงทะเล</p></div>
+          <button type="button" disabled>🔒 ยังไม่ปลดล็อก</button>
+        </article>
+      </div>
+      <footer class="map-footer">
+        <span>⭐ คะแนนรวม</span><strong id="mapScore">0</strong><span>/ 120</span>
+      </footer>
+    </section>
+
+    <section id="stageScreen" class="screen stage-screen" aria-labelledby="stageTitle">
+      <header class="stage-hud">
+        <button id="stageBackButton" class="round-button" type="button" aria-label="กลับแผนที่">‹</button>
+        <div><small id="stageNumber">ด่านที่ 1</small><strong id="stageTitle">ศูนย์การค้า</strong></div>
+        <div class="stage-progress"><span id="stageProgressBar"></span></div>
+        <div class="score-pill">⭐ <b id="stageScore">0</b></div>
+      </header>
+
+      <div class="scene-wrap">
+        <div id="sceneMall" class="scene scene-mall active-scene" aria-label="ฉากศูนย์การค้าแบบแอนิเมชัน">
+          <div class="mall-sky"><span class="cloud c1"></span><span class="cloud c2"></span></div>
+          <div class="mall-building">
+            <div class="mall-sign">CENTRAL GREEN MALL</div>
+            <div class="mall-floor floor-top">
+              <div class="shop-window fashion"><span>👕</span><span>👜</span></div>
+              <button class="scene-hotspot mall-light light-a" data-hotspot-group="mall-lights" aria-label="ไฟดวงที่ 1">💡</button>
+              <button class="scene-hotspot mall-light light-b" data-hotspot-group="mall-lights" aria-label="ไฟดวงที่ 2">💡</button>
+              <div class="empty-zone">โซนว่าง</div>
+            </div>
+            <div class="mall-floor floor-bottom">
+              <div class="cafe"><span>☕</span><span>🥤</span></div>
+              <div class="people"><span>🧍‍♀️</span><span>🧍</span></div>
+              <div class="mall-bins"><span>♻️</span><span>🗑️</span></div>
+            </div>
+          </div>
+          <div class="mall-ground"><span class="mall-tree">🌳</span><span class="mall-car">🚗</span></div>
+          <div class="scene-shade"></div>
+        </div>
+
+        <div id="sceneHome" class="scene scene-home" aria-label="ฉากบ้านแบบแอนิเมชัน">
+          <div class="home-sky"><span class="sun">☀️</span><span class="cloud c3"></span></div>
+          <div class="home-yard"><span class="yard-tree">🌳</span><span class="bird">🐦</span></div>
+          <div class="house">
+            <div class="roof"></div>
+            <div class="room living-room"><span class="tv">📺</span><span class="lamp">💡</span><span class="plug">🔌</span></div>
+            <div class="room kitchen"><span class="tap">🚰</span><span class="food">🍌</span><span class="bin">🗑️</span></div>
+            <div class="door">🚪</div>
+          </div>
+          <div class="home-path"></div>
+          <div class="scene-shade"></div>
+        </div>
+
+        <div id="scenePark" class="scene scene-park" aria-label="ฉากสวนสาธารณะแบบแอนิเมชัน">
+          <div class="park-sky"><span class="cloud c4"></span><span class="sun soft">☀️</span></div>
+          <div class="park-hills"></div>
+          <div class="park-trees"><span>🌳</span><span>🌲</span><span>🌳</span></div>
+          <div class="park-pond"><span class="duck">🦆</span></div>
+          <div class="park-pathway"></div>
+          <button class="scene-hotspot litter l1" data-hotspot-group="park-trash" aria-label="ขวดพลาสติก">🧴</button>
+          <button class="scene-hotspot litter l2" data-hotspot-group="park-trash" aria-label="กระป๋อง">🥫</button>
+          <button class="scene-hotspot litter l3" data-hotspot-group="park-trash" aria-label="ถุงพลาสติก">🛍️</button>
+          <button class="scene-hotspot litter l4" data-hotspot-group="park-trash" aria-label="แก้วพลาสติก">🥤</button>
+          <button class="scene-hotspot litter l5" data-hotspot-group="park-trash" aria-label="กระดาษ">📄</button>
+          <button class="scene-hotspot plant-spot p1" data-hotspot-group="park-plant" aria-label="จุดปลูกต้นไม้ 1">＋</button>
+          <button class="scene-hotspot plant-spot p2" data-hotspot-group="park-plant" aria-label="จุดปลูกต้นไม้ 2">＋</button>
+          <button class="scene-hotspot plant-spot p3" data-hotspot-group="park-plant" aria-label="จุดปลูกต้นไม้ 3">＋</button>
+          <div class="park-animal"><span>🐿️</span><i class="plastic-ring">⭕</i></div>
+          <div class="scene-shade"></div>
+        </div>
+
+        <div id="sceneBeach" class="scene scene-beach" aria-label="ฉากชายหาดแบบแอนิเมชัน">
+          <div class="beach-sky"><span class="sun">☀️</span><span class="cloud c5"></span></div>
+          <div class="sea"><span class="wave w1"></span><span class="wave w2"></span><span class="boat">⛵</span></div>
+          <div class="sand"><span class="palm">🌴</span><span class="shell">🐚</span></div>
+          <button class="scene-hotspot marine-trash b1" data-hotspot-group="beach-trash" aria-label="ขวดพลาสติก">🧴</button>
+          <button class="scene-hotspot marine-trash b2" data-hotspot-group="beach-trash" aria-label="กระป๋อง">🥫</button>
+          <button class="scene-hotspot marine-trash b3" data-hotspot-group="beach-trash" aria-label="ถุงพลาสติก">🛍️</button>
+          <button class="scene-hotspot marine-trash b4" data-hotspot-group="beach-trash" aria-label="หลอด">🥤</button>
+          <button class="scene-hotspot marine-trash b5" data-hotspot-group="beach-trash" aria-label="เชือก">🪢</button>
+          <button class="scene-hotspot marine-trash b6" data-hotspot-group="beach-trash" aria-label="กล่องอาหาร">🥡</button>
+          <div class="turtle">🐢</div>
+          <div class="drain"><span>▥</span><i class="drain-trash">🧃</i></div>
+          <div class="scene-shade"></div>
+        </div>
+      </div>
+
+      <div class="task-panel">
+        <div class="task-meta"><span id="taskCounter">ภารกิจ 1/3</span><span id="taskType">เลือกคำตอบ</span></div>
+        <h2 id="taskTitle">ปิดไฟในพื้นที่ที่ไม่มีคน</h2>
+        <p id="taskPrompt">เลือกวิธีที่ช่วยประหยัดพลังงานได้ดีที่สุด</p>
+        <div id="taskProgress" class="hotspot-progress hidden"><span></span><b>0/0</b></div>
+        <div id="choiceArea" class="choice-grid"></div>
+        <div id="taskFeedback" class="task-feedback hidden" aria-live="polite"></div>
+        <button id="nextTaskButton" class="primary-button hidden" type="button">ภารกิจถัดไป</button>
+      </div>
+    </section>
+
+    <section id="stageCompleteScreen" class="screen stage-complete-screen" aria-labelledby="stageCompleteTitle">
+      <div class="complete-confetti" aria-hidden="true"></div>
+      <div class="complete-card">
+        <div id="stageBadge" class="stage-badge">🏬</div>
+        <p class="eyebrow dark">MISSION COMPLETE</p>
+        <h1 id="stageCompleteTitle">ผ่านด่านศูนย์การค้า!</h1>
+        <p id="stageCompleteText">คุณช่วยลดพลังงาน พลาสติก และขยะได้สำเร็จ</p>
+        <div class="stage-stars">⭐⭐⭐</div>
+        <div class="complete-score">คะแนนรวม <strong id="completeScore">30</strong> / 120</div>
+        <button id="returnMapButton" class="primary-button" type="button">ไปด่านถัดไป</button>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="screen result-screen" aria-labelledby="resultTitle">
+      <div class="final-world">
+        <div class="final-glow"></div>
+        <span>🌍</span>
+        <i>🌿</i><i>🌱</i><i>✨</i>
+      </div>
+      <div class="result-card">
+        <p class="eyebrow dark">EARTH RESTORED</p>
+        <h1 id="resultTitle">คุณคือฮีโร่พิทักษ์โลก!</h1>
+        <p id="resultPlayer">ฮีโร่ของเรา</p>
+        <div class="result-score"><strong id="finalScore">120</strong><span>/120 คะแนน</span></div>
+        <div class="badge-grid">
+          <div><span>🏬</span><b>ฮีโร่ศูนย์การค้า</b></div>
+          <div><span>🏡</span><b>ฮีโร่ประจำบ้าน</b></div>
+          <div><span>🌳</span><b>ฮีโร่สวนสีเขียว</b></div>
+          <div><span>🏖️</span><b>ฮีโร่ทะเลสะอาด</b></div>
+        </div>
+        <blockquote>“ทุกการกระทำเล็ก ๆ ของเรา ช่วยเปลี่ยนโลกให้ดีขึ้นได้จริง”</blockquote>
+        <p id="saveResultStatus" class="report-status" aria-live="polite"></p>
+        <button id="playAgainButton" class="primary-button" type="button">เล่นอีกครั้ง</button>
+        <button id="changePlayerButton" class="ghost-button dark-ghost" type="button">เปลี่ยนผู้เล่น</button>
+      </div>
+    </section>
+  </main>
+  <script src="config.js?v=20260722-earth-hero-2"></script>
+  <script src="app.js?v=20260722-earth-hero-2"></script>
+</body>
+</html>
