@@ -1,5 +1,5 @@
 window.EARTH_HERO_CONFIG = {
-  API_URL: "",
+  API_URL: "https://script.google.com/macros/s/AKfycbx0o-StzFrRBun9tEhDXhfpf8QGMRM-bg94d1wVIYPk8Nr26az4YwzPpIYHlLj_NFoX/exec",
   BRANCHES: [
     "A11 Residential - PHL2",
     "A62 Central People Development Center",
